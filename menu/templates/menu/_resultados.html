@@ -1,0 +1,30 @@
+{% for categoria, items in grupos %}
+  <section class="categoria" id="{{ categoria.slug }}">
+    <h2>{{ categoria.nombre }}</h2>
+    {% if categoria.nota %}<p class="nota">{{ categoria.nota }}</p>{% endif %}
+
+    {% for item in items %}
+      <article class="item">
+        {% if item.imagen %}
+          <img class="foto" src="{{ item.imagen.url }}" alt="{{ item.nombre }}" loading="lazy">
+        {% endif %}
+        <div style="flex:1">
+          <h3>{{ item.nombre }}</h3>
+          {% if item.descripcion %}<p>{{ item.descripcion|linebreaksbr }}</p>{% endif %}
+          {% if item.variantes.all %}
+            <p>
+              {% for v in item.variantes.all %}
+                {{ v.nombre }}: <span class="precio">{{ v.precio_fmt }}</span>{% if not forloop.last %} · {% endif %}
+              {% endfor %}
+            </p>
+          {% endif %}
+        </div>
+        {% if item.precio is not None and not item.variantes.all %}
+          <span class="precio">{{ item.precio_fmt }}</span>
+        {% endif %}
+      </article>
+    {% endfor %}
+  </section>
+{% empty %}
+  <p class="vacio">No encontramos platos con “{{ q }}”. Prueba con otra palabra.</p>
+{% endfor %}
