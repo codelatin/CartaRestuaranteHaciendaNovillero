@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -127,4 +128,78 @@ MAILERS = {
     'default': {
         'BACKEND': 'django.core.mail.backends.console.EmailBackend',
     },
+}
+
+
+JAZZMIN_SETTINGS = {
+
+    "site_title": "Hacienda El Novillero",
+    "site_header": "Hacienda El Novillero",
+    "site_brand": "Hacienda El Novillero",
+
+    # LOGOS
+    "site_logo": "menu/images/logo_hacienda.png",
+    "login_logo": "menu/images/logo_hacienda.png",
+    "login_logo_dark": "menu/images/logo_hacienda.png",
+
+    "site_logo_classes": "img-fluid",
+
+    "custom_css": "menu/css/jazzmin_custom.css",
+
+    "site_icon": "menu/images/logo_hacienda.png",
+
+    "welcome_sign": "Bienvenido a Hacienda El Novillero",
+    "copyright": "Hacienda El Novillero",
+
+    # BUSCADOR
+    "search_model": [
+        "menu.Item",
+        "menu.Categoria",
+        "menu.Etiqueta",
+        "menu.Variante",
+    ],
+
+    # MENÚ LATERAL
+    "show_sidebar": True,
+    "navigation_expanded": True,
+
+    "order_with_respect_to": [
+        "menu",
+        "menu.configuracionsitio",
+        "menu.categoria",
+        "menu.item",
+        "menu.variante",
+        "menu.etiqueta",
+        "auth",
+        "auth.user",
+        "auth.group",
+    ],
+
+    # ICONOS
+    "icons": {
+        "menu": "fas fa-utensils",
+        "menu.configuracionsitio": "fas fa-cog",
+        "menu.categoria": "fas fa-layer-group",
+        "menu.item": "fas fa-utensils",
+        "menu.variante": "fas fa-tags",
+        "menu.etiqueta": "fas fa-bookmark",
+
+        "auth": "fas fa-users-cog",
+        "auth.user": "fas fa-user",
+        "auth.group": "fas fa-users",
+    },
+
+    "default_icon_parents": "fas fa-chevron-circle-right",
+    "default_icon_children": "fas fa-circle",
+
+    "changeform_format": "horizontal_tabs",
+
+    "related_modal_active": True,
+
+    "show_ui_builder": True,
+    "show_theme_chooser": True,
+
+    "language_chooser": False,
+
+    "use_google_fonts_cdn": True,
 }

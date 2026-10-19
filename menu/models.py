@@ -112,6 +112,8 @@ class Item(models.Model):
     orden = models.PositiveSmallIntegerField(default=0)
 
     class Meta:
+        verbose_name = "Plato"
+        verbose_name_plural = "Platos"
         ordering = ["categoria__orden", "orden", "nombre"]
 
     def __str__(self):
