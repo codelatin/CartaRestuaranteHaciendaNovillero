@@ -1,30 +1,47 @@
-{% for categoria, items in grupos %}
-  <section class="categoria" id="{{ categoria.slug }}">
-    <h2>{{ categoria.nombre }}</h2>
-    {% if categoria.nota %}<p class="nota">{{ categoria.nota }}</p>{% endif %}
+{% for grupo in grupos %}
+    <section class="categoria" id="{{ grupo.categoria.slug }}">
+        <h2>{{ grupo.categoria.nombre }}</h2>
+        {% if grupo.categoria.nota %}
+            <p class="nota-categoria">{{ grupo.categoria.nota }}</p>
+        {% endif %}
 
-    {% for item in items %}
-      <article class="item">
-        {% if item.imagen %}
-          <img class="foto" src="{{ item.imagen.url }}" alt="{{ item.nombre }}" loading="lazy">
+        {% if grupo.modo_busqueda %}
+            <div class="resultados-busqueda">
+                {% for item in grupo.items_sueltos %}
+                    {% include "menu/_plato_suelto.html" with item=item %}
+                {% endfor %}
+            </div>
+        {% else %}
+            {% for bloque in grupo.bloques %}
+                <div class="bloque-menu {% if bloque.lado_imagen == 'derecha' %}bloque-menu--imagen-derecha{% endif %}">
+                    <div class="bloque-menu__foto">
+                        <img src="{{ bloque.imagen.url }}" alt="{% if bloque.titulo %}{{ bloque.titulo }}{% else %}{{ grupo.categoria.nombre }}{% endif %}" loading="lazy">
+                    </div>
+                    <div class="bloque-menu__platos">
+                        {% for asignacion in bloque.asignaciones_visibles %}
+                            {% with item=asignacion.item %}
+                                {% include "menu/_plato_linea.html" with item=item %}
+                            {% endwith %}
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+
+            {% if grupo.items_sueltos %}
+                <div class="platos-sin-bloque">
+                    {% for item in grupo.items_sueltos %}
+                        {% include "menu/_plato_suelto.html" with item=item %}
+                    {% endfor %}
+                </div>
+            {% endif %}
         {% endif %}
-        <div style="flex:1">
-          <h3>{{ item.nombre }}</h3>
-          {% if item.descripcion %}<p>{{ item.descripcion|linebreaksbr }}</p>{% endif %}
-          {% if item.variantes.all %}
-            <p>
-              {% for v in item.variantes.all %}
-                {{ v.nombre }}: <span class="precio">{{ v.precio_fmt }}</span>{% if not forloop.last %} · {% endif %}
-              {% endfor %}
-            </p>
-          {% endif %}
-        </div>
-        {% if item.precio is not None and not item.variantes.all %}
-          <span class="precio">{{ item.precio_fmt }}</span>
-        {% endif %}
-      </article>
-    {% endfor %}
-  </section>
+    </section>
 {% empty %}
-  <p class="vacio">No encontramos platos con “{{ q }}”. Prueba con otra palabra.</p>
+    <p class="vacio">
+        {% if q %}
+            No encontramos platos con “{{ q }}”. Prueba con otra palabra.
+        {% else %}
+            No encontramos platos con esa etiqueta.
+        {% endif %}
+    </p>
 {% endfor %}

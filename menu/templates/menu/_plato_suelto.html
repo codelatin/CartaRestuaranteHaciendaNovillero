@@ -1,0 +1,21 @@
+<article class="plato-suelto">
+    {% if item.imagen %}
+        <img class="plato-suelto__foto" src="{{ item.imagen.url }}" alt="{{ item.nombre }}" loading="lazy">
+    {% endif %}
+    <div class="plato-suelto__contenido">
+        <div class="plato-linea__encabezado">
+            <h3>{{ item.nombre }}</h3>
+            {% if item.precio is not None and not item.variantes.all %}
+                <span class="precio">{{ item.precio_fmt }}</span>
+            {% endif %}
+        </div>
+        {% if item.descripcion %}<p class="plato-descripcion">{{ item.descripcion|linebreaksbr }}</p>{% endif %}
+        {% if item.variantes.all %}
+            <div class="plato-variantes">
+                {% for variante in item.variantes.all %}
+                    <div class="plato-variante"><span>{{ variante.nombre }}</span><span class="precio">{{ variante.precio_fmt }}</span></div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+</article>

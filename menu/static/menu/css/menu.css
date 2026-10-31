@@ -1,0 +1,1032 @@
+:root {
+
+    --crema: #f4ece0;
+
+    --verde: #3f4a3c;
+
+    --dorado: #b89b5e;
+
+    --acento: #a95125;
+
+    --texto-suave: #5f6256;
+
+}
+
+
+
+* {
+
+    box-sizing: border-box;
+
+}
+
+
+
+html {
+
+     scroll-behavior: smooth; 
+
+    }
+
+/* ==========================================================
+
+   TIPOGRAFÍA DINÁMICA - HACIENDA EL NOVILLERO
+
+   ========================================================== */
+
+
+
+body {
+
+    margin: 0;
+
+    background: var(--crema);
+
+    color: var(--verde);
+
+
+
+    /* Fuente seleccionada desde Django Admin */
+
+    font-family: var(--fuente-menu, "Poppins"), sans-serif;
+
+
+
+    /* Tamaño base seleccionado desde Django Admin */
+
+    font-size: var(--tamano-letra, 16px);
+
+}
+
+/* Aplicar la tipografía a todos los elementos del menú */
+
+
+
+.contenedor-menu,
+
+.contenedor-menu h1,
+
+.contenedor-menu h2,
+
+.contenedor-menu h3,
+
+.contenedor-menu p,
+
+.contenedor-menu span,
+
+.contenedor-menu input,
+
+.contenedor-menu button,
+
+.contenedor-menu select,
+
+.contenedor-menu textarea {
+
+    font-family: inherit;
+
+}
+
+
+
+.contenedor-menu {
+
+    width: min(100% - 32px, 920px);
+
+    margin: 0 auto;
+
+    padding: 28px 0 32px;
+
+}
+
+
+
+.cabecera-menu {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    text-align: center;
+
+    margin-bottom: 22px;
+
+}
+
+
+
+/* Logo principal de Hacienda El Novillero */
+
+.logo-hacienda {
+
+    display: block;
+
+    width: clamp(200px, 22vw, 300px);
+
+    max-width: 70vw;
+
+    max-height: 260px;
+
+    height: auto;
+
+    object-fit: contain;
+
+    margin: 0 auto 2px;
+
+    margin-bottom: -40px !important;
+
+
+
+}
+
+
+
+.titulo-menu {
+
+    margin: 0;
+
+    font-weight: 300;
+
+    font-size: clamp(1.5rem, 3.5vw, 2rem);
+
+    letter-spacing: .45em;
+
+    padding-left: .45em;
+
+}
+
+
+
+.buscador {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 8px;
+
+    max-width: 860px;
+
+    margin: 0 auto 34px;
+
+}
+
+
+
+.buscador-campo { flex: 1 1 260px; }
+
+
+
+.buscador input[type="search"] {
+
+    width: 100%;
+
+    min-height: 44px;
+
+    padding: 10px 18px;
+
+    border: 1px solid var(--dorado);
+
+    border-radius: 999px;
+
+    background: rgba(255, 255, 255, .55);
+
+    color: var(--verde);
+
+    font: inherit;
+
+    font-size: .92rem;
+
+    outline-offset: 3px;
+
+}
+
+
+
+.chip {
+
+    position: relative;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+
+}
+
+
+
+.chip input {
+
+    position: absolute;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+}
+
+
+
+.chip span {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    min-height: 42px;
+
+    padding: 8px 16px;
+
+    border: 1px solid var(--dorado);
+
+    border-radius: 999px;
+
+    background: transparent;
+
+    color: var(--verde);
+
+    font-size: .9rem;
+
+    transition: background .15s ease, color .15s ease;
+
+}
+
+
+
+.chip:has(input:checked) span {
+
+    background: var(--verde);
+
+    color: var(--crema);
+
+}
+
+
+
+.chip input:focus-visible + span { outline: 2px solid var(--acento); outline-offset: 3px; }
+
+
+
+.categoria { margin: 0 0 44px; }
+
+
+
+.categoria > h2 {
+
+    margin: 34px 0 20px;
+
+    text-align: center;
+
+    font-weight: 400;
+
+    font-size: clamp(1.35rem, 3vw, 1.8rem);
+
+    line-height: 1.25;
+
+}
+
+
+
+.nota-categoria {
+
+    margin: 0 0 20px;
+
+    padding: 8px 12px;
+
+    border: 2px solid #29261f;
+
+    text-align: center;
+
+    font-size: .88rem;
+
+    font-weight: 600;
+
+    font-style: italic;
+
+}
+
+
+
+/* Cada bloque reproduce una composición del PDF: varios platos + una foto. */
+
+.bloque-menu {
+
+    display: grid;
+
+    grid-template-columns: minmax(0, .86fr) minmax(0, 1.14fr);
+
+    align-items: center;
+
+    gap: clamp(20px, 4vw, 42px);
+
+    margin: 22px 0 38px;
+
+}
+
+
+
+.bloque-menu__foto {
+
+    grid-column: 1;
+
+    grid-row: 1;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    min-width: 0;
+
+    position: relative;
+
+}
+
+
+
+.bloque-menu__foto img {
+
+    display: block;
+
+    width: min(100%, 250px);
+
+    aspect-ratio: 1 / 1;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+
+    box-shadow: 0 1px 0 rgba(63, 74, 60, .15);
+
+}
+
+
+
+.bloque-menu__platos {
+
+    grid-column: 2;
+
+    grid-row: 1;
+
+    min-width: 0;
+
+}
+
+
+
+.bloque-menu--imagen-derecha .bloque-menu__foto {
+
+    grid-column: 2;
+
+}
+
+
+
+.bloque-menu--imagen-derecha .bloque-menu__platos {
+
+    grid-column: 1;
+
+}
+
+
+
+.plato-linea { margin: 0 0 16px; }
+
+.plato-linea:last-child { margin-bottom: 0; }
+
+
+
+.plato-linea__encabezado {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: baseline;
+
+    gap: 12px;
+
+}
+
+
+
+.plato-linea h3,
+
+.plato-suelto h3 {
+
+    margin: 0;
+
+    color: var(--verde);
+
+    font-size: .83rem;
+
+    font-weight: 700;
+
+    line-height: 1.35;
+
+    text-transform: uppercase;
+
+}
+
+
+
+.precio {
+
+    color: var(--verde);
+
+    font-size: .83rem;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+
+}
+
+
+
+.plato-descripcion {
+
+    margin: 3px 0 0;
+
+    color: var(--texto-suave);
+
+    font-size: .77rem;
+
+    line-height: 1.42;
+
+    text-align: justify;
+
+}
+
+
+
+.plato-variantes { margin-top: 7px; }
+
+.plato-variante { display: flex; justify-content: space-between; gap: 12px; font-size: .78rem; margin-top: 3px; }
+
+
+
+/* Los platos que aún no tienen bloque siguen siendo visibles. */
+
+.platos-sin-bloque,
+
+.resultados-busqueda {
+
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    gap: 13px;
+
+    margin: 18px 0 28px;
+
+}
+
+
+
+.plato-suelto {
+
+    display: grid;
+
+    grid-template-columns: auto minmax(0, 1fr);
+
+    gap: 14px;
+
+    align-items: start;
+
+    padding: 7px 0;
+
+}
+
+
+
+.plato-suelto__foto {
+
+    width: 82px;
+
+    height: 82px;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+
+}
+
+
+
+.plato-suelto__contenido { min-width: 0; }
+
+
+
+.plato-suelto:not(:has(.plato-suelto__foto)) {
+
+    grid-template-columns: minmax(0, 1fr);
+
+}
+
+
+
+.vacio { padding: 40px 12px; text-align: center; }
+
+.htmx-request { opacity: .55; transition: opacity .2s; }
+
+
+
+.pie-menu {
+
+    border-top: 1px solid rgba(184, 155, 94, .7);
+
+    margin-top: 42px;
+
+    padding-top: 18px;
+
+    color: var(--texto-suave);
+
+    font-size: .72rem;
+
+    line-height: 1.5;
+
+}
+
+
+
+.pie-menu p { margin: 8px 0; }
+
+.pie-menu .nota-precios { color: var(--verde); font-weight: 700; font-style: italic; }
+
+.contacto-menu { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 18px; justify-content: center; }
+
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+
+
+@media (min-width: 720px) {
+
+    .contenedor-menu { padding-top: 36px; }
+
+    .categoria { margin-bottom: 54px; }
+
+    .platos-sin-bloque { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 32px; }
+
+}
+
+
+
+@media (max-width: 600px) {
+
+    .contenedor-menu { width: min(100% - 24px, 520px); padding-top: 20px; }
+
+    .logo-hacienda {
+
+    width: clamp(175px, 52vw, 230px);
+
+    max-width: 70vw;
+
+    max-height: 200px;
+
+    height: auto;
+
+    object-fit: contain;
+
+}
+
+    .titulo-menu { letter-spacing: .35em; }
+
+    .buscador { gap: 7px; margin-bottom: 24px; }
+
+    .buscador-campo { flex-basis: 100%; }
+
+    .buscador input[type="search"] { min-height: 42px; }
+
+    .chip span { min-height: 36px; padding: 6px 12px; font-size: .82rem; }
+
+    .categoria { margin-bottom: 34px; }
+
+    .categoria > h2 { margin-top: 28px; }
+
+
+
+    .bloque-menu,
+
+    .bloque-menu--imagen-derecha {
+
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 19px;
+
+        margin: 24px 0 34px;
+
+    }
+
+
+
+    .bloque-menu__foto,
+
+    .bloque-menu--imagen-derecha .bloque-menu__foto { order: 0; width: 100%; }
+
+    .bloque-menu__platos,
+
+    .bloque-menu--imagen-derecha .bloque-menu__platos { order: 1; width: 100%; }
+
+    .bloque-menu__foto img { width: min(68vw, 235px); }
+
+    .plato-linea { margin-bottom: 15px; }
+
+    .plato-linea h3, .plato-suelto h3, .precio { font-size: .8rem; }
+
+    .plato-descripcion { font-size: .76rem; }
+
+    .plato-suelto__foto { width: 70px; height: 70px; }
+
+    .plato-suelto { gap: 10px; }
+
+}
+
+
+
+@media (prefers-reduced-motion: reduce) {
+
+    html { scroll-behavior: auto; }
+
+    *, *::before, *::after { transition-duration: .01ms !important; }
+
+}
+
+
+
+/* ==========================================================
+
+   BLOQUES VISUALES - HACIENDA EL NOVILLERO
+
+   ========================================================== */
+
+
+
+/* Distribución de cada bloque en pantallas grandes */
+
+@media (min-width: 601px) {
+
+
+
+    .bloque-menu {
+
+        display: grid !important;
+
+        grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+
+        align-items: center;
+
+        gap: 30px;
+
+        margin: 40px 0 55px;
+
+        width: 100%;
+
+    }
+
+
+
+    /* Fotografía del bloque */
+
+    .bloque-menu__foto {
+
+        grid-column: 1;
+
+        grid-row: 1;
+
+        display: flex;
+
+        justify-content: center;
+
+        align-items: center;
+
+        min-width: 0;
+
+    }
+
+
+
+    .bloque-menu__foto img {
+
+        display: block !important;
+
+        width: 280px !important;
+
+        max-width: 100% !important;
+
+        height: 280px !important;
+
+        object-fit: cover;
+
+        aspect-ratio: 1 / 1;
+
+        border-radius: 50%;
+
+        margin: 0 auto;
+
+    }
+
+
+
+    /* Lista de platos: uno debajo del otro */
+
+    .bloque-menu__platos {
+
+        grid-column: 2;
+
+        grid-row: 1;
+
+        display: flex !important;
+
+        flex-direction: column !important;
+
+        align-items: stretch;
+
+        gap: 18px;
+
+        min-width: 0;
+
+        width: 100%;
+
+    }
+
+
+
+    .bloque-menu__platos > * {
+
+        width: 100%;
+
+        min-width: 0;
+
+        box-sizing: border-box;
+
+    }
+
+
+
+    /* Cuando la fotografía va a la derecha */
+
+    .bloque-menu--imagen-derecha {
+
+        grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+
+    }
+
+
+
+    .bloque-menu--imagen-derecha .bloque-menu__foto {
+
+        grid-column: 2;
+
+    }
+
+
+
+    .bloque-menu--imagen-derecha .bloque-menu__platos {
+
+        grid-column: 1;
+
+    }
+
+}
+
+
+
+/* Adaptación para teléfonos */
+
+@media (max-width: 600px) {
+
+
+
+    .bloque-menu {
+
+        display: flex !important;
+
+        flex-direction: column;
+
+        align-items: center;
+
+        gap: 22px;
+
+        margin: 30px 0 40px;
+
+    }
+
+
+
+    .bloque-menu__foto {
+
+        width: 100%;
+
+        display: flex;
+
+        justify-content: center;
+
+    }
+
+
+
+    .bloque-menu__foto img {
+
+        display: block !important;
+
+        width: 220px !important;
+
+        max-width: 80vw !important;
+
+        height: 220px !important;
+
+        aspect-ratio: 1 / 1;
+
+        object-fit: cover;
+
+        border-radius: 50%;
+
+    }
+
+
+
+    .bloque-menu__platos {
+
+        display: flex !important;
+
+        flex-direction: column !important;
+
+        width: 100%;
+
+        gap: 20px;
+
+    }
+
+
+
+    .bloque-menu__platos > * {
+
+        width: 100%;
+
+        box-sizing: border-box;
+
+    }
+
+}
+
+
+
+@media (min-width: 601px) {
+
+    .bloque-menu {
+
+        display: grid !important;
+
+        grid-template-columns: minmax(0, 280px) minmax(0, 1fr) !important;
+
+        gap: 30px !important;
+
+        align-items: center;
+
+        width: 100%;
+
+        margin: 40px 0 55px;
+
+    }
+
+
+
+    .bloque-menu__foto {
+
+        grid-column: 1;
+
+        grid-row: 1;
+
+        display: flex;
+
+        justify-content: center;
+
+        align-items: center;
+
+        min-width: 0;
+
+    }
+
+
+
+    .bloque-menu__foto img {
+
+        display: block !important;
+
+        width: 250px !important;
+
+        max-width: 100% !important;
+
+        height: 250px !important;
+
+        object-fit: cover;
+
+        aspect-ratio: 1 / 1;
+
+        border-radius: 50%;
+
+    }
+
+
+
+    .bloque-menu__platos {
+
+        grid-column: 2;
+
+        grid-row: 1;
+
+        display: flex !important;
+
+        flex-direction: column !important;
+
+        gap: 18px;
+
+        width: 100%;
+
+        min-width: 0;
+
+    }
+
+
+
+    .bloque-menu--imagen-derecha .bloque-menu__foto {
+
+        grid-column: 2;
+
+    }
+
+
+
+    .bloque-menu--imagen-derecha .bloque-menu__platos {
+
+        grid-column: 1;
+
+    }
+
+}
+
+
+/* ==========================================================
+   TAMAÑOS CONFIGURABLES DESDE DJANGO ADMIN
+   Mantiene la jerarquía visual original del menú.
+   El valor por defecto de --tamano-letra es 16px.
+   ========================================================== */
+
+/* Nombres de los platos y sus precios */
+.plato-linea h3,
+.plato-suelto h3,
+.precio {
+    font-size: calc(var(--tamano-letra, 16px) * 0.83);
+}
+
+/* Descripciones */
+.plato-descripcion {
+    font-size: calc(var(--tamano-letra, 16px) * 0.77);
+}
+
+/* Precios y nombres de variantes */
+.plato-variante {
+    font-size: calc(var(--tamano-letra, 16px) * 0.78);
+}
+
+/* Notas de las categorías */
+.nota-categoria {
+    font-size: calc(var(--tamano-letra, 16px) * 0.88);
+}
+
+/* Pie de página */
+.pie-menu {
+    font-size: calc(var(--tamano-letra, 16px) * 0.72);
+}
+
+/* Buscador y filtros */
+.buscador input[type="search"] {
+    font-size: calc(var(--tamano-letra, 16px) * 0.92);
+}
+.chip span {
+    font-size: calc(var(--tamano-letra, 16px) * 0.9);
+}
+
+/* Adaptaciones móviles: prevalecen sobre las reglas anteriores */
+@media (max-width: 600px) {
+    .plato-linea h3,
+    .plato-suelto h3,
+    .precio {
+        font-size: calc(var(--tamano-letra, 16px) * 0.80);
+    }
+    .plato-descripcion {
+        font-size: calc(var(--tamano-letra, 16px) * 0.76);
+    }
+    .chip span {
+        font-size: calc(var(--tamano-letra, 16px) * 0.82);
+    }
+}

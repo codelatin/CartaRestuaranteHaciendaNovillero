@@ -151,6 +151,17 @@ JAZZMIN_SETTINGS = {
     "welcome_sign": "Bienvenido a Hacienda El Novillero",
     "copyright": "Hacienda El Novillero",
 
+     # ======================================================
+    # MENÚ SUPERIOR - DESCARGA DE LA CARTA
+    # ======================================================
+    "topmenu_links": [
+        {
+            "name": "Descargar carta PDF",
+            "url": "descargar_carta_pdf",
+            "permissions": ["menu.view_item"],
+        },
+    ],
+
     # BUSCADOR
     "search_model": [
         "menu.Item",
@@ -167,6 +178,7 @@ JAZZMIN_SETTINGS = {
         "menu",
         "menu.configuracionsitio",
         "menu.categoria",
+        "menu.bloquemenu",
         "menu.item",
         "menu.variante",
         "menu.etiqueta",
@@ -180,6 +192,7 @@ JAZZMIN_SETTINGS = {
         "menu": "fas fa-utensils",
         "menu.configuracionsitio": "fas fa-cog",
         "menu.categoria": "fas fa-layer-group",
+        "menu.bloquemenu": "fas fa-images",
         "menu.item": "fas fa-utensils",
         "menu.variante": "fas fa-tags",
         "menu.etiqueta": "fas fa-bookmark",

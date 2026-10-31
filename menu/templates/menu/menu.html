@@ -1,78 +1,82 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <title>Menú | {{ config.nombre }}</title>
-  <script src="https://unpkg.com/htmx.org@2.0.4"></script>
-  <style>
-    :root { --crema:#f4ece0; --verde:#3f4a3c; --dorado:#b89b5e; --acento:#b5541f; }
-    body { margin:0; background:var(--crema); color:var(--verde); font-family:Poppins, system-ui, sans-serif; }
-    .contenedor { max-width:820px; margin:0 auto; padding:2rem 1rem; }
-    h1 { text-align:center; letter-spacing:.5em; font-weight:300; }
-    .buscador { display:flex; gap:.5rem; flex-wrap:wrap; margin-bottom:1.5rem; }
-    .buscador input[type=search] { flex:1 1 220px; padding:.7rem 1rem; border:1px solid var(--dorado); border-radius:999px; background:#fff8; }
-    .chip { padding:.4rem .9rem; border:1px solid var(--dorado); border-radius:999px; cursor:pointer; }
-    .chip input { display:none; }
-    .chip:has(input:checked) { background:var(--verde); color:var(--crema); }
-    .categoria h2 { font-weight:400; text-align:center; margin-top:2.5rem; }
-    .nota { text-align:center; font-style:italic; font-weight:600; border:2px solid #000; padding:.5rem; }
-    .item { display:flex; gap:1rem; justify-content:space-between; margin:1.2rem 0; }
-    .item h3 { margin:0; font-size:1rem; text-transform:uppercase; }
-    .item p { margin:.25rem 0 0; font-size:.85rem; }
-    .precio { font-weight:700; white-space:nowrap; }
-    .foto { width:120px; height:120px; border-radius:50%; object-fit:cover; flex:none; }
-    .categoria .item:nth-child(even) { flex-direction:row-reverse; }  /* alterna fotos izq/der */
-    .vacio { text-align:center; padding:3rem 0; }
-    .htmx-request { opacity:.6; transition:opacity .2s; }
-    footer { margin-top:3rem; font-size:.75rem; }
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f4ece0">
+    <title>Menú | {{ config.nombre }}</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'menu/images/logo1.ico' %}?v=2">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Tipografías disponibles para Hacienda El Novillero -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
 
-    @media (max-width: 600px) {
-  h1 { letter-spacing: .3em; font-size: 1.5rem; }
 
-  /* Foto arriba, texto y precio debajo */
-  .item,
-  .categoria .item:nth-child(even) {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-  .foto { width: 160px; height: 160px; }
-  .precio { font-size: 1.05rem; }
-}
-  </style>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Lato:wght@300;400;700&family=Playfair+Display:wght@400;500;600;700&family=Merriweather:wght@300;400;700&family=Nunito:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+>
+    <link rel="stylesheet" href="{% static 'menu/css/menu.css' %}">
+    <script src="https://unpkg.com/htmx.org@2.0.4"></script>
 </head>
-<body>
-<div class="contenedor">
-  <h1>MENÚ</h1>
 
-  <form class="buscador"
-        hx-get="{% url 'menu:buscar' %}"
-        hx-target="#resultados"
-        hx-trigger="input changed delay:300ms from:find input[type=search], change from:find input[type=radio]"
-        hx-push-url="false"
-        hx-indicator="#resultados">
-    <input type="search" name="q" value="{{ q }}" placeholder="Buscar plato o ingrediente…" autocomplete="off">
-    <label class="chip"><input type="radio" name="etiqueta" value="" {% if not etiqueta_activa %}checked{% endif %}> Todo</label>
-    {% for e in etiquetas %}
-      <label class="chip">
-        <input type="radio" name="etiqueta" value="{{ e.slug }}" {% if e.slug == etiqueta_activa %}checked{% endif %}>
-        {{ e.nombre }}
-      </label>
-    {% endfor %}
-  </form>
+<body
+    style="
+        --fuente-menu: '{{ config.fuente_menu|default:'Poppins'|escape }}';
+        --tamano-letra: {{ config.tamano_letra|default:'16' }}px;
+    "
+>
 
-  <main id="resultados">
-    {% include "menu/_resultados.html" %}
-  </main>
+<div class="contenedor-menu">
+    <header class="cabecera-menu">
+        <img class="logo-hacienda"
+             src="{% static 'menu/images/logo_hacienda.png' %}"
+             alt="{{ config.nombre }}">
+        <h1 class="titulo-menu">MENÚ</h1>
+    </header>
 
-  <footer>
-    <strong>{{ config.nota_precios }}</strong>
-    <p>{{ config.nota_legal }}</p>
-    <p>{{ config.nota_alergenos }}</p>
-  </footer>
+    <form class="buscador"
+          hx-get="{% url 'menu:buscar' %}"
+          hx-target="#resultados"
+          hx-trigger="input changed delay:300ms, change"
+          hx-push-url="false"
+          hx-indicator="#resultados">
+        <label class="buscador-campo">
+            <span class="sr-only">Buscar plato o ingrediente</span>
+            <input type="search" name="q" value="{{ q }}"
+                   placeholder="Buscar plato o ingrediente…" autocomplete="off">
+        </label>
+
+        <label class="chip">
+            <input type="radio" name="etiqueta" value="" {% if not etiqueta_activa %}checked{% endif %}>
+            <span>Todo</span>
+        </label>
+        {% for e in etiquetas %}
+            <label class="chip">
+                <input type="radio" name="etiqueta" value="{{ e.slug }}" {% if e.slug == etiqueta_activa %}checked{% endif %}>
+                <span>{{ e.nombre }}</span>
+            </label>
+        {% endfor %}
+    </form>
+
+    <main id="resultados" aria-live="polite">
+        {% include "menu/_resultados.html" %}
+    </main>
+
+    <footer class="pie-menu">
+        {% if config.nota_precios %}<p class="nota-precios">{{ config.nota_precios }}</p>{% endif %}
+        {% if config.nota_legal %}<p>{{ config.nota_legal }}</p>{% endif %}
+        {% if config.nota_alergenos %}<p>{{ config.nota_alergenos }}</p>{% endif %}
+        {% if config.telefono or config.instagram or config.facebook or config.email %}
+            <div class="contacto-menu">
+                {% if config.instagram %}<span>Instagram: @{{ config.instagram|cut:"@" }}</span>{% endif %}
+                {% if config.telefono %}<span>Reservas: {{ config.telefono }}</span>{% endif %}
+                {% if config.facebook %}<span>Facebook: {{ config.facebook }}</span>{% endif %}
+                {% if config.email %}<span>{{ config.email }}</span>{% endif %}
+            </div>
+        {% endif %}
+    </footer>
 </div>
 </body>
 </html>

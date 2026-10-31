@@ -15,3 +15,50 @@
     text-align: center;
     margin-bottom: 10px !important;
 }
+
+/* ==========================================================
+   BOTÓN DESCARGAR CARTA PDF - JAZZMIN
+   Hacienda El Novillero
+   ========================================================== */
+
+a[href*="descargar-carta-pdf"] {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #3f4a3c !important;
+    color: #ffffff !important;
+
+    border: 1px solid #b89b5e !important;
+    border-radius: 8px !important;
+
+    padding: 9px 16px !important;
+    margin: 4px 8px !important;
+
+    font-weight: 600 !important;
+    text-decoration: none !important;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+/* Efecto al pasar el cursor */
+a[href*="descargar-carta-pdf"]:hover {
+    background-color: #56d71a !important;
+    color: #ffffff !important;
+    border-color: #d3b879 !important;
+    text-decoration: none !important;
+}
+
+/* Efecto al pulsar el botón */
+a[href*="descargar-carta-pdf"]:active {
+    transform: scale(0.98);
+}
+
+/* Accesibilidad mediante teclado */
+a[href*="descargar-carta-pdf"]:focus-visible {
+    outline: 2px solid #b89b5e !important;
+    outline-offset: 3px;
+}
