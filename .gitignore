@@ -1,0 +1,32 @@
+# Entornos virtuales
+.venv/
+venv/
+env/
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Variables privadas
+.env
+.env.*
+!.env.example
+
+# Base de datos local
+db.sqlite3
+db.sqlite3-journal
+
+# Imágenes subidas por Django
+media/
+
+# Archivos recopilados
+staticfiles/
+
+# IDE
+.vscode/
+.idea/
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
